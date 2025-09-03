@@ -182,7 +182,7 @@ details.importer {
 .table-scroll {
   -webkit-overflow-scrolling: touch; /* плавный свайп на iOS */
 }
-.matrix { min-width: 420px; } /* чтобы на узких экранах был горизонтальный скролл, не ломая сетку */
+.matrix { min-width: 250px; } /* чтобы на узких экранах был горизонтальный скролл, не ломая сетку */
 
 /* чуть крупнее тапы по умолчанию */
 .btn { min-height: 40px; }
@@ -219,10 +219,6 @@ details.importer {
     min-height: 44px;
     border-radius: 12px;
     padding: 12px 14px;
-  }
-  .matrix input {
-    font-size: 14px;
-    padding: 0 4px; /* чуть меньше отступы, чтобы цифры не теснились */
   }
   /* мини-поля min/max — делаем резиновыми на 1/2 ширины */
   #rand-min, #rand-max, #rows, #cols {
