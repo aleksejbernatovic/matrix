@@ -1,0 +1,236 @@
+:root {
+  --bg: #0f1115;
+  --card: #161a22;
+  --border: #242a36;
+  --text: #e6eaf2;
+  --muted: #9aa3b2;
+  --accent: #5aa2ff;
+  --accent-2: #34c759;
+  --danger: #ff5757;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.container { max-width: 960px; margin: 32px auto; padding: 0 16px; }
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+h1, h2, h3 { margin: 0 0 12px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.gap { gap: 8px; }
+.row.gap {
+  margin-bottom: 16px;
+  align-items: flex-end;
+}
+#rand-min,
+#rand-max,
+#rows,
+#cols{
+  width: 70px; /* компактнее, чем у "строк/столбцов" */
+}
+label { display: inline-grid; gap: 12px; color: var(--muted)}
+input[type="number"], textarea {
+  background: #0d1016;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
+textarea { width: 100%; resize: vertical; }
+
+.btn {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: #121722;
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .05s ease;
+}
+.btn:hover { border-color: #2f3747; }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--accent); border-color: #498ff2; color: #081019; }
+.btn.secondary { background: #1a2130; }
+.btn.danger { background: #2a1010; border-color: #3c1515; color: #ffdede; }
+
+.icon-btn {
+  border: none; background: transparent; color: var(--muted);
+  font-size: 18px; cursor: pointer; padding: 6px;
+}
+.icon-btn:hover { color: var(--text); }
+
+.table-scroll { overflow: auto; border: 1px solid var(--border); border-radius: 10px; }
+.matrix { border-collapse: collapse; width: 100%; min-width: 320px; }
+.matrix caption { text-align: left; padding: 8px; color: var(--muted); }
+.matrix td, .matrix th {
+  border: 1px solid var(--border);
+  padding: 0;
+}
+.matrix input {
+  width: 100%; height: 38px;
+  background: #0d1016; color: var(--text);
+  border: none; outline: none; text-align: center;
+}
+.matrix .cell-changed { background: rgba(52,199,89,0.18); }
+
+.muted { color: var(--muted); }
+
+details.importer {
+  margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 12px;
+}
+
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,.6);
+  display: grid; place-items: center; padding: 16px; z-index: 100;
+}
+.modal.hidden { display: none; }
+.modal-content {
+  width: min(800px, 100%); background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); display: grid; grid-template-rows: auto 1fr auto;
+}
+.modal-header, .modal-footer {
+  display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border);
+}
+.modal-footer { border-top: 1px solid var(--border); border-bottom: none; }
+.modal-body { padding: 12px 14px; max-height: 60vh; overflow: auto; }
+
+.history-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #121722;
+}
+.history-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px;
+}
+.history-meta { font-size: 12px; color: var(--muted); }
+.history-diff { font-size: 13px; color: var(--text); }
+.history-steps { margin-top: 8px; }
+.step {
+  background: #0e1420; border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px; margin-top: 6px;
+}
+.step .desc { color: var(--muted); margin-bottom: 6px; }
+.step pre {
+  margin: 0; overflow: auto; background: transparent; color: var(--text);
+}
+/* Контейнер чекбокса */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Скрываем стандартный чекбокс */
+.checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #0d1016;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0; /* чтобы паддинги совпадали с кнопками */
+}
+
+/* Галочка */
+.checkbox input[type="checkbox"]::after {
+  content: "✔";
+  font-size: 14px;
+  color: var(--accent-2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%) scale(0);
+  transition: transform 0.15s ease;
+}
+
+/* Активное состояние */
+.checkbox input[type="checkbox"]:checked::after {
+  transform: translate(-50%, -52%) scale(1);
+}
+
+/* Наведение */
+.checkbox input[type="checkbox"]:hover {
+  border-color: var(--accent);
+}
+/* ——— Базовые улучшения для тач ——— */
+.table-scroll {
+  -webkit-overflow-scrolling: touch; /* плавный свайп на iOS */
+}
+.matrix { min-width: 420px; } /* чтобы на узких экранах был горизонтальный скролл, не ломая сетку */
+
+/* чуть крупнее тапы по умолчанию */
+.btn { min-height: 40px; }
+.matrix input { height: 44px; font-size: 16px; } /* >=16px — чтобы iOS не зумил при фокусе */
+
+/* ——— Мобильные стили ——— */
+@media (max-width: 640px) {
+  .container { padding: 0 12px; }
+  .header h1 { font-size: 18px; }
+  .card { padding: 12px; }
+
+  /* Группа контролов в один/два ряда с равными отступами.
+     Если у тебя используется .row.gap — применим и к нему, и к .controls */
+  .controls, .row.gap {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* два столбца на телефоне */
+    gap: 8px;
+    align-items: end;
+    margin-bottom: 12px; /* одинаковый отступ до матрицы */
+  }
+
+  /* Лейблы (Строк/Столбцов, min/max) занимают по половине */
+  .controls > label,
+  .row.gap > label {
+    display: inline-grid;
+    gap: 6px;
+  }
+
+  /* Кнопкам — ширину на всю строку */
+  .controls .btn,
+  .row.gap .btn {
+    width: 100%;
+    grid-column: span 2;
+    min-height: 44px;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .matrix input {
+    font-size: 14px;
+    padding: 0 4px; /* чуть меньше отступы, чтобы цифры не теснились */
+  }
+  /* мини-поля min/max — делаем резиновыми на 1/2 ширины */
+  #rand-min, #rand-max, #rows, #cols {
+    width: 100%;
+  }
+
+  /* текстовые области и история — комфортные отступы и высоты */
+  textarea { min-height: 120px; }
+  .modal-body { max-height: 70vh; }
+}
+

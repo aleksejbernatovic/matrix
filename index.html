@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Матрица</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Привод к ступенчатой матрице</h1>
+      <button id="history-btn" class="btn secondary" title="Показать историю">История изменений</button>
+    </header>
+
+    <section class="card">
+      <h2>1) Ввод матрицы</h2>
+      <div class="row gap">
+        <label>Строк
+          <input id="rows" type="number" min="1" value="3" />
+        </label>
+        <label>Столбцов
+          <input id="cols" type="number" min="1" value="3" />
+        </label>
+        <button id="create-table" class="btn">Создать таблицу</button>
+      </div>
+      <div class="row gap">
+        <input id="rand-min" type="number" placeholder="от" />
+        <input id="rand-max" type="number" placeholder="до" />
+        <button id="fill-random" class="btn secondary">Заполнить рандомно</button>
+      </div>
+      <div id="input-area" class="table-scroll">
+        <table id="input-table" class="matrix"></table>
+      </div>
+
+      <details class="importer">
+        <summary>Импорт из текста (числа через пробел, строки — с новой строки)</summary>
+        <textarea id="text-input" rows="5" placeholder="Пример:
+1 2 3
+4 5 6
+7 8 9"></textarea>
+        <div class="row">
+          <button id="import-text" class="btn">Импортировать в таблицу</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>2) Применить логику</h2>
+      <div class="row">
+        <button id="apply" class="btn primary">Применить преобразование</button>
+        <label class="checkbox">
+          <input type="checkbox" id="no-fractions" />
+          <span>Без дробей</span>
+        </label>
+        <span id="status" class="muted"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Результат</h2>
+      <div id="output-area" class="table-scroll">
+        <table id="output-table" class="matrix"></table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модалка истории -->
+  <div id="history-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="history-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="history-title">История изменений</h3>
+        <button id="close-history" class="icon-btn" aria-label="Закрыть">✕</button>
+      </div>
+      <div id="history-list" class="modal-body"></div>
+      <div class="modal-footer">
+        <button id="clear-history" class="btn danger">Очистить историю</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="transform.js"></script>
+</body>
+</html>
